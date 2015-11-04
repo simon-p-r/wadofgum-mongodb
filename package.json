@@ -1,0 +1,35 @@
+{
+  "name": "wadofgum-mongodb",
+  "version": "0.0.1",
+  "description": "wadofgum models for mongo",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "lab -a code -v -t 100 -L"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/simon-p-r/wadofgum-mongodb.git"
+  },
+  "keywords": [
+    "mongodb",
+    "models",
+    "wadofgum"
+  ],
+  "author": "simon-p-r",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/simon-p-r/wadofgum-mongodb/issues"
+  },
+  "homepage": "https://github.com/simon-p-r/wadofgum-mongodb#readme",
+  "devDependencies": {
+    "code": "^2.0.1",
+    "lab": "^7.1.0",
+    "mongodb": "^2.0.47",
+    "nedb": "^1.2.1",
+    "wadofgum": "^4.0.0",
+    "wadofgum-json-schema": "^0.2.0"
+  },
+  "dependencies": {
+    "deep-compact": "^0.2.4"
+  }
+}
