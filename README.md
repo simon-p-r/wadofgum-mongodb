@@ -49,3 +49,6 @@ model.save((err, result) => {
     model.dateOfBirth // '1975-10-01'
 });
 ```
+### TODO
+
++ Add replaceOne, insertMany and updateMany methods
