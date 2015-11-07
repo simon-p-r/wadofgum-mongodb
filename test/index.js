@@ -7,6 +7,8 @@ const Validation = require('wadofgum-json-schema');
 const Mongo = require('../lib/index.js');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
+const ZSchema = require('z-schema');
+const Validator = new ZSchema();
 
 // Fixtures
 const UserSchema = require('./fixtures/userSchema.js');
@@ -67,7 +69,7 @@ describe('Validation', () => {
         User.schema = UserSchema;
         User.db = testDb;
         expect(User.meta.get('db')).to.be.an.object();
-        expect(User.name).to.equal('User');
+        expect(User.type).to.equal('User');
         done();
 
     });
@@ -77,6 +79,7 @@ describe('Validation', () => {
         class User extends Wadofgum.mixin(Validation, Mongo) {};
         User.schema = UserSchema;
         User.db = testDb;
+        User.validator = Validator;
         const user = new User();
         user.save((err, doc) => {
 
