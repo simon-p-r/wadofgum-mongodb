@@ -41,6 +41,7 @@ Model.schema = {
 };
 
 Model.db = db //mongodb database handle created by MongoClient method
+Model.validator = validator // z-schema handle created by z-schema constructor object
 
 let model = new Model({ name: 'test', age: '45', dateOfBirth: '1975-10-01'});
 model.save((err, result) => {

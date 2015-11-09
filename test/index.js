@@ -18,13 +18,15 @@ const lab = exports.lab = Lab.script();
 const describe = lab.describe;
 const it = lab.it;
 const expect = Code.expect;
+const before = lab.before;
+const after = lab.after;
 
 describe('Validation', () => {
 
     let testDb;
-    lab.before((done) => {
+    before((done) => {
 
-        const url = 'mongodb://localhost:27017/test_db';
+        const url = 'mongodb://localhost:27017/wadofgum_db';
         MongoClient.connect(url, (err, db) => {
 
             expect(err).to.not.exist();
@@ -33,7 +35,7 @@ describe('Validation', () => {
         });
     });
 
-    lab.after((done) => {
+    after((done) => {
 
         testDb.close(() => {
 
@@ -88,16 +90,19 @@ describe('Validation', () => {
             User.schema = UserSchema;
             const validUser = new User({
                 _id: ObjectId('563ce539918409541f6b24af'),
-                name: 'John',
-                age: 50,
-                dateOfBirth: '05-10-1975'
+                person: {
+                    name: 'John',
+                    age: 50,
+                    dateOfBirth: '05-10-1975'
+                }
+
             });
             validUser.save((err, docA) => {
 
                 expect(err).to.exist();
                 expect(docA).to.not.exist();
 
-                validUser.dateOfBirth = '1975-10-05';
+                validUser.person.dateOfBirth = '1975-10-05';
                 validUser.save({ w: 1 }, (err, docB) => {
 
                     expect(err).to.not.exist();
@@ -114,13 +119,16 @@ describe('Validation', () => {
         class User extends Wadofgum.mixin(Mongo, Validation) {};
         User.schema = UserSchema;
         User.db = testDb;
-        const user = new User({
+        const userFind = new User({
             _id: ObjectId('563ce539918409541f6b24af')
         });
-        user.findOne((err, doc) => {
+
+        userFind.findOne((err, doc) => {
 
             expect(err).to.not.exist();
-            expect(doc).to.be.an.object();
+            expect(doc._id.equals(ObjectId('563ce539918409541f6b24af'))).to.be.true();
+            expect(doc._id).to.be.instanceof(ObjectId);
+            expect(doc.person.name).to.equal('John');
             done();
         });
     });
@@ -161,6 +169,44 @@ describe('Validation', () => {
         });
     });
 
+    it('should expose a replaceOne method on the instance of model class object', (done) => {
+
+        class User extends Wadofgum.mixin(Validation, Mongo) {};
+        User.schema = UserSchema;
+        User.db = testDb;
+        User.validator = Validator;
+        const user = new User({
+            _id: ObjectId('563ce539918409541f6b24af'),
+            person: {
+                name: 'Frank',
+                age: 35,
+                dateOfBirth: '1981-10-05'
+            }
+        });
+        user.replaceOne((err, doc) => {
+
+            expect(err).to.not.exist();
+            expect(doc.result.nModified).to.equal(1);
+            expect(doc.ops[0]._id.equals(ObjectId('563ce539918409541f6b24af'))).to.be.true();
+            const newUser = new User({
+                _id: ObjectId('563ce49d227e258022be8fed'),
+                person: {
+                    name: 'Frank',
+                    age: 105,
+                    dateOfBirth: '05-10-1981'
+                }
+            });
+            newUser.replaceOne({ bypassDocumentValidation: true }, (errA, docA) => {
+
+                expect(errA).to.exist();
+                expect(docA).to.not.exist();
+                done();
+
+            });
+
+        });
+    });
+
     it('should expose a deleteOne method on the instance of model class object', (done) => {
 
         class User extends Wadofgum.mixin(Validation, Mongo) {};
@@ -169,11 +215,22 @@ describe('Validation', () => {
         const user = new User({
             _id: ObjectId('563ce539918409541f6b24af')
         });
-        user.deleteOne((err, res) => {
+        user.deleteOne({ bypassDocumentValidation: true }, (err, res) => {
 
             expect(err).to.not.exist();
             expect(res.result.n).to.equal(1);
-            done();
+            expect(user._id.equals(ObjectId('563ce539918409541f6b24af'))).to.be.true();
+
+            const nextUser = new User({
+                _id: ObjectId('663ce539918409541f6b24af')
+            });
+            nextUser.deleteOne((err, resA) => {
+
+                expect(err).to.not.exist();
+                expect(resA.result.n).to.equal(1);
+                expect(nextUser._id.equals(ObjectId('663ce539918409541f6b24af'))).to.be.true();
+                done();
+            });
         });
     });
 
@@ -185,7 +242,7 @@ describe('Validation', () => {
         User.count((err, count) => {
 
             expect(err).to.not.exist();
-            expect(count).to.be.a.number();
+            expect(count).to.be.a.number(2);
             done();
         });
     });

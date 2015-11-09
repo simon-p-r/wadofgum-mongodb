@@ -7,23 +7,36 @@ module.exports = {
         type: 'collection',
         jsonSchema: 'v4',
         name: 'user',
+        base: 'entity',
         version: 1
     },
     schema: {
         type: 'object',
         properties: {
-            name: {
-                type: 'string'
+            person: {
+                type: 'object',
+                properties: {
+                    name: {
+                        type: 'string'
+                    },
+                    age: {
+                        type: 'integer'
+                    },
+                    dateOfBirth: {
+                        type: 'string',
+                        format: 'date'
+                    }
+                },
+                additionalProperties: false,
+                required: ['name', 'age', 'dateOfBirth']
             },
-            age: {
-                type: 'integer'
-            },
-            dateOfBirth: {
-                type: 'string',
-                format: 'date'
+            _id: {
+                type: 'object'
             }
         },
-        required: ['name', 'age', 'dateOfBirth']
+        additionalProperties: false,
+        required: ['person']
+
     }
 
 };
