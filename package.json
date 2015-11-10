@@ -1,6 +1,6 @@
 {
   "name": "wadofgum-mongodb",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "wadofgum models for mongo",
   "main": "lib/index.js",
   "scripts": {

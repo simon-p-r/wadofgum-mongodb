@@ -129,7 +129,14 @@ describe('Validation', () => {
             expect(doc._id.equals(ObjectId('563ce539918409541f6b24af'))).to.be.true();
             expect(doc._id).to.be.instanceof(ObjectId);
             expect(doc.person.name).to.equal('John');
-            done();
+            userFind.findOne({ 'person.name': 0 }, (err, docA) => {
+
+                expect(err).to.not.exist();
+                expect(docA._id.equals(ObjectId('563ce539918409541f6b24af'))).to.be.true();
+                expect(docA._id).to.be.instanceof(ObjectId);
+                expect(docA.person.name).to.not.exist();
+                done();
+            });
         });
     });
 
