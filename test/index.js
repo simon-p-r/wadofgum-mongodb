@@ -185,8 +185,8 @@ describe('Validation', () => {
         const user = new User({
             _id: ObjectId('563ce539918409541f6b24af'),
             person: {
-                name: 'Frank',
-                age: 35,
+                name: 'John',
+                age: 100,
                 dateOfBirth: '1981-10-05'
             }
         });
@@ -195,6 +195,7 @@ describe('Validation', () => {
             expect(err).to.not.exist();
             expect(doc.result.nModified).to.equal(1);
             expect(doc.ops[0]._id.equals(ObjectId('563ce539918409541f6b24af'))).to.be.true();
+
             const newUser = new User({
                 _id: ObjectId('563ce49d227e258022be8fed'),
                 person: {
@@ -208,9 +209,7 @@ describe('Validation', () => {
                 expect(errA).to.exist();
                 expect(docA).to.not.exist();
                 done();
-
             });
-
         });
     });
 

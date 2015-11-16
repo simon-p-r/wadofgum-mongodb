@@ -1,5 +1,7 @@
 ## Changelog
 
++ 0.1.0 - minor bump for updated deps
+
 + 0.0.5 - fixed findOne not working with projection for returned object from mongo
 
 + 0.0.4 - updated dependencies, added mongo script for tests and improved tests.  Added replaceOne method for full document replacement with full document validation.
