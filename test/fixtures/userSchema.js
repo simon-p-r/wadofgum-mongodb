@@ -31,7 +31,7 @@ module.exports = {
                 required: ['name', 'age', 'dateOfBirth']
             },
             _id: {
-                type: 'object'
+                type: 'string'
             }
         },
         additionalProperties: false,

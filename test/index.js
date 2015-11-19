@@ -6,7 +6,7 @@ const Wadofgum = require('wadofgum');
 const Validation = require('wadofgum-json-schema');
 const Mongo = require('../lib/index.js');
 const MongoClient = require('mongodb').MongoClient;
-const ObjectId = require('mongodb').ObjectId;
+// const ObjectId = require('mongodb').ObjectId;
 const ZSchema = require('z-schema');
 const Validator = new ZSchema();
 
@@ -89,7 +89,8 @@ describe('Validation', () => {
             expect(doc).to.not.exist();
             User.schema = UserSchema;
             const validUser = new User({
-                _id: ObjectId('563ce539918409541f6b24af'),
+                // _id: ObjectId('563ce539918409541f6b24af'),
+                _id: '563ce539918409541f6b24af',
                 person: {
                     name: 'John',
                     age: 50,
@@ -120,20 +121,19 @@ describe('Validation', () => {
         User.schema = UserSchema;
         User.db = testDb;
         const userFind = new User({
-            _id: ObjectId('563ce539918409541f6b24af')
+            _id: '563ce539918409541f6b24af'
         });
 
         userFind.findOne((err, doc) => {
 
             expect(err).to.not.exist();
-            expect(doc._id.equals(ObjectId('563ce539918409541f6b24af'))).to.be.true();
-            expect(doc._id).to.be.instanceof(ObjectId);
+            expect(doc._id).to.equal('563ce539918409541f6b24af');
             expect(doc.person.name).to.equal('John');
+
             userFind.findOne({ 'person.name': 0 }, (err, docA) => {
 
                 expect(err).to.not.exist();
-                expect(docA._id.equals(ObjectId('563ce539918409541f6b24af'))).to.be.true();
-                expect(docA._id).to.be.instanceof(ObjectId);
+                expect(doc._id).to.equal('563ce539918409541f6b24af');
                 expect(docA.person.name).to.not.exist();
                 done();
             });
@@ -146,7 +146,7 @@ describe('Validation', () => {
         User.schema = UserSchema;
         User.db = testDb;
         const user = new User({
-            _id: ObjectId('563ce539918409541f6b24af'),
+            _id: '563ce539918409541f6b24af',
             person: {
                 name: 'Frank',
                 age: 35,
@@ -158,7 +158,7 @@ describe('Validation', () => {
             expect(err).to.not.exist();
             expect(doc.result.nModified).to.equal(1);
             const newUser = new User({
-                _id: ObjectId('563ce49d227e258022be8fed'),
+                _id: '563ce49d227e258022be8fed',
                 person: {
                     name: 'Frank',
                     age: 105,
@@ -183,7 +183,7 @@ describe('Validation', () => {
         User.db = testDb;
         User.validator = Validator;
         const user = new User({
-            _id: ObjectId('563ce539918409541f6b24af'),
+            _id: '563ce539918409541f6b24af',
             person: {
                 name: 'John',
                 age: 100,
@@ -194,10 +194,13 @@ describe('Validation', () => {
 
             expect(err).to.not.exist();
             expect(doc.result.nModified).to.equal(1);
-            expect(doc.ops[0]._id.equals(ObjectId('563ce539918409541f6b24af'))).to.be.true();
+            expect(doc.ops[0]._id).to.equal('563ce539918409541f6b24af');
+            expect(doc.ops[0].person.name).to.equal('John');
+            expect(doc.ops[0].person.age).to.equal(100);
+            expect(doc.ops[0].person.dateOfBirth).to.equal('1981-10-05');
 
             const newUser = new User({
-                _id: ObjectId('563ce49d227e258022be8fed'),
+                _id: '563ce49d227e258022be8fed',
                 person: {
                     name: 'Frank',
                     age: 105,
@@ -219,22 +222,22 @@ describe('Validation', () => {
         User.schema = UserSchema;
         User.db = testDb;
         const user = new User({
-            _id: ObjectId('563ce539918409541f6b24af')
+            _id: '563ce539918409541f6b24af'
         });
         user.deleteOne({ bypassDocumentValidation: true }, (err, res) => {
 
             expect(err).to.not.exist();
             expect(res.result.n).to.equal(1);
-            expect(user._id.equals(ObjectId('563ce539918409541f6b24af'))).to.be.true();
+            expect(user._id).to.equal('563ce539918409541f6b24af');
 
             const nextUser = new User({
-                _id: ObjectId('663ce539918409541f6b24af')
+                _id: '663ce539918409541f6b24af'
             });
             nextUser.deleteOne((err, resA) => {
 
                 expect(err).to.not.exist();
                 expect(resA.result.n).to.equal(1);
-                expect(nextUser._id.equals(ObjectId('663ce539918409541f6b24af'))).to.be.true();
+                expect(nextUser._id).to.equal('663ce539918409541f6b24af');
                 done();
             });
         });
@@ -248,7 +251,7 @@ describe('Validation', () => {
         User.count((err, count) => {
 
             expect(err).to.not.exist();
-            expect(count).to.be.a.number(2);
+            expect(count).to.be.a.number().and.equal(2);
             done();
         });
     });
@@ -258,10 +261,11 @@ describe('Validation', () => {
         class User extends Wadofgum.mixin(Mongo, Validation) {};
         User.schema = UserSchema;
         User.db = testDb;
-        User.distinct('name', (err, docs) => {
+        User.distinct('person.name', (err, docs) => {
 
             expect(err).to.not.exist();
-            expect(docs).to.be.an.array();
+            expect(docs).to.include(['Michael Jackson', 'Frank']);
+            expect(docs).to.be.an.array().and.to.have.length(2);
             done();
         });
     });
@@ -274,7 +278,7 @@ describe('Validation', () => {
         User.find((err, docs) => {
 
             expect(err).to.not.exist();
-            expect(docs).to.be.an.array();
+            expect(docs).to.be.an.array().and.to.have.length(2);
             done();
         });
     });

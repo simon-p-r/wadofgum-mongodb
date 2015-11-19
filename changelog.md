@@ -1,5 +1,7 @@
 ## Changelog
 
++ 0.1.1 - fixed updateOne to $set on update to allow partial update rather than document replacement, updated lab and hoek dependencies
+
 + 0.1.0 - minor bump for updated deps
 
 + 0.0.5 - fixed findOne not working with projection for returned object from mongo
