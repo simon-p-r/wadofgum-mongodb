@@ -1,5 +1,7 @@
 ## Changelog
 
++ 0.2.0 - added insertMany with test however method doesn't validate calling code will have to validate for now until change can be made, also updated mongodb dev dependency
+
 + 0.1.1 - fixed updateOne to $set on update to allow partial update rather than document replacement, updated lab and hoek dependencies
 
 + 0.1.0 - minor bump for updated deps

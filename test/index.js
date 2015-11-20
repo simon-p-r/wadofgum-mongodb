@@ -6,11 +6,11 @@ const Wadofgum = require('wadofgum');
 const Validation = require('wadofgum-json-schema');
 const Mongo = require('../lib/index.js');
 const MongoClient = require('mongodb').MongoClient;
-// const ObjectId = require('mongodb').ObjectId;
 const ZSchema = require('z-schema');
 const Validator = new ZSchema();
 
 // Fixtures
+const Recs = require('./fixtures/recs.js');
 const UserSchema = require('./fixtures/userSchema.js');
 
 // Set-up lab
@@ -89,7 +89,6 @@ describe('Validation', () => {
             expect(doc).to.not.exist();
             User.schema = UserSchema;
             const validUser = new User({
-                // _id: ObjectId('563ce539918409541f6b24af'),
                 _id: '563ce539918409541f6b24af',
                 person: {
                     name: 'John',
@@ -279,6 +278,21 @@ describe('Validation', () => {
 
             expect(err).to.not.exist();
             expect(docs).to.be.an.array().and.to.have.length(2);
+            done();
+        });
+    });
+
+    it('should expose a insertMany method on the model class object', (done) => {
+
+        class User extends Wadofgum.mixin(Validation, Mongo) {};
+        User.schema = UserSchema;
+        User.db = testDb;
+        User.insertMany(Recs, (err, res) => {
+
+            expect(err).to.not.exist();
+            expect(res.insertedCount).to.equal(3);
+            expect(res.ops[0].person.name).to.be.a.string();
+            expect(res.ops[0].person.age).to.be.a.number();
             done();
         });
     });
