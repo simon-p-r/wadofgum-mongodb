@@ -4,9 +4,9 @@ A mongodb mixin for [wadofgum](https://github.com/nlf/wadofgum)
 
 ### Usage
 
-After extending your model with this mixin, instances of your class will have a `validate` method which accepts a callback as its only parameter.
+After extending your model with this mixin, instances of your class will have various wrapped mongodb crud methods.
 
-Simply provide a json schema for validation and then assign it to the static `schema` property on your class then attach a mongodb db handle
+An example of how to use is shown below
 
 ```js
 const Wadofgum = require('wadofgum');
@@ -45,6 +45,7 @@ Model.validator = validator // z-schema handle created by z-schema constructor o
 
 let model = new Model({ name: 'test', age: '45', dateOfBirth: '1975-10-01'});
 model.save((err, result) => {
+    err // null
     model.name // 'test'
     model.age // '45'
     model.dateOfBirth // '1975-10-01'
@@ -52,4 +53,7 @@ model.save((err, result) => {
 ```
 ### TODO
 
-+ Add replaceOne, insertMany and updateMany methods
++ Implement a better interface for custom _id
++ Static methods on class object must only do crud based on the model type so parameters passed to mongo must be restricted
++ Parse queries from mongo better
++ Implement methods on models

@@ -4,7 +4,7 @@ module.exports = [
 
     {
         person: {
-            name: 'John',
+            name: 'Sam',
             age: 21,
             dateOfBirth: '1994-12-25'
         }
