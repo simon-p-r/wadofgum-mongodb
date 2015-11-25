@@ -1,4 +1,4 @@
-## wadofgum-mongodb [![Build Status](https://travis-ci.org/simon-p-r/wadofgum-mongodb.svg)](https://travis-ci.org/simon-pr/wadofgum-mongodb)
+## wadofgum-mongodb [![Build Status](https://travis-ci.org/simon-p-r/wadofgum-mongodb.svg)](https://travis-ci.org/simon-p-r/wadofgum-mongodb)
 
 A mongodb mixin for [wadofgum](https://github.com/nlf/wadofgum)
 
