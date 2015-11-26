@@ -84,6 +84,19 @@ describe('Validation', () => {
 
     });
 
+
+    it('should set db object to model class', (done) => {
+
+        class User extends Wadofgum.mixin(Mongo, Validation) {};
+        User.schema = UserSchema;
+        User.validator = Validator;
+        expect(User.meta.has('schema')).to.equal(true);
+        expect(User.meta.has('metaSchema')).to.equal(true);
+        expect(User.meta.has('validator')).to.equal(true);
+        done();
+
+    });
+
     it('should expose a save method on the instance of model class object', (done) => {
 
         class User extends Wadofgum.mixin(Validation, Mongo) {};
@@ -341,13 +354,19 @@ describe('Validation', () => {
         class User extends Wadofgum.mixin(Validation, Mongo) {};
         User.schema = UserSchema;
         User.db = testDb;
+        User.validator = Validator;
         User.insertMany(Recs, (err, res) => {
 
             expect(err).to.not.exist();
             expect(res.insertedCount).to.equal(3);
             expect(res.ops[0].person.name).to.be.a.string();
             expect(res.ops[0].person.age).to.be.a.number();
-            done();
+            User.insertMany(Recs, (err, resA) => {
+
+                expect(err).to.exist();
+                expect(resA).to.not.exist();
+                done();
+            });
         });
     });
 
@@ -358,6 +377,7 @@ describe('Validation', () => {
         ridsSchema.metaSchema.rids = ['name', 'age'];
         User.schema = ridsSchema;
         User.db = testDb;
+        User.validator = Validator;
         User.insertMany(Recs, (err, res) => {
 
             expect(err).to.exist();
@@ -371,7 +391,12 @@ describe('Validation', () => {
                 expect(resA.ops).to.have.length(3);
                 expect(resA.insertedIds).to.include(['sam::1994-12-25', 'frank::1964-12-25', 'kathy::1974-12-25']);
 
-                done();
+                Recs[0].person.age = null;
+                User.insertMany(Recs, { wtimeout: 5000 }, (err, resB) => {
+
+                    expect(err).to.exist();
+                    done();
+                });
             });
         });
     });
