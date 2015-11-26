@@ -364,6 +364,7 @@ describe('Validation', () => {
             User.insertMany(Recs, (err, resA) => {
 
                 expect(err).to.exist();
+                expect(err.details[0].code).to.equal('INVALID_TYPE');
                 expect(resA).to.not.exist();
                 done();
             });
@@ -381,7 +382,7 @@ describe('Validation', () => {
         User.insertMany(Recs, (err, res) => {
 
             expect(err).to.exist();
-            expect(res).to.not.exist();
+            expect(err.details).to.include(['name', 'age']);
             ridsSchema.metaSchema.rids = ['person.name', 'person.dateOfBirth'];
             User.schema = ridsSchema;
 
@@ -395,6 +396,8 @@ describe('Validation', () => {
                 User.insertMany(Recs, { wtimeout: 5000 }, (err, resB) => {
 
                     expect(err).to.exist();
+                    expect(err.details[0]).to.be.an.object();
+                    expect(err.details[0].code).to.equal('INVALID_TYPE');
                     done();
                 });
             });

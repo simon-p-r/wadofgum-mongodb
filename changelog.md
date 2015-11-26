@@ -1,5 +1,7 @@
 ## Changelog
 
++ 0.4.0 - minor bump for changes in errors returned by insertMany as using its own validate method rather than wadofgum-json-schema
+
 + 0.3.0 - added validation to insertMany method, improved tests to keep coverage and added neo-async dependency
 
 + 0.2.1 - enabled use of rids from metaSchema to be used to create _id if specified, added generation on insert and insertMany.  Updated docs as not correct.
