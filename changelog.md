@@ -1,5 +1,7 @@
 ## Changelog
 
++ 0.4.1 - updated dependencies
+
 + 0.4.0 - minor bump for changes in errors returned by insertMany as using its own validate method rather than wadofgum-json-schema
 
 + 0.3.0 - added validation to insertMany method, improved tests to keep coverage and added neo-async dependency

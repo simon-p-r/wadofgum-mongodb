@@ -1,6 +1,6 @@
 {
   "name": "wadofgum-mongodb",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "wadofgum models for mongo",
   "main": "lib/index.js",
   "scripts": {
@@ -24,14 +24,14 @@
   "homepage": "https://github.com/simon-p-r/wadofgum-mongodb#readme",
   "devDependencies": {
     "code": "^2.0.1",
-    "lab": "^7.3.0",
-    "mongodb": "^2.0.49",
+    "lab": "^8.0.0",
+    "mongodb": "^2.1.0",
     "wadofgum": "^4.1.0",
-    "wadofgum-json-schema": "^0.4.1",
-    "z-schema": "^3.16.0"
+    "wadofgum-json-schema": "^0.4.2",
+    "z-schema": "^3.16.1"
   },
   "dependencies": {
-    "basic-utils": "^1.0.0",
+    "basic-utils": "^1.1.0",
     "deep-compact": "^0.2.4",
     "hoek": "^3.0.4",
     "neo-async": "^1.7.0"
