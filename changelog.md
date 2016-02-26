@@ -1,5 +1,7 @@
 ## Changelog
 
++ 1.0.0 - changes due to wadofgum core changes, improved tests and removed pre-test mongodb script.  Bumped other deps
+
 + 0.4.1 - updated dependencies
 
 + 0.4.0 - minor bump for changes in errors returned by insertMany as using its own validate method rather than wadofgum-json-schema
