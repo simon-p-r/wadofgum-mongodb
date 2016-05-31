@@ -1,4 +1,4 @@
-## wadofgum-mongodb [![Build Status](https://travis-ci.org/simon-p-r/wadofgum-mongodb.svg)](https://travis-ci.org/simon-p-r/wadofgum-mongodb) [![Coverage Status](https://coveralls.io/repos/simon-p-r/wadofgum-mongodb/badge.svg?branch=master&service=github)](https://coveralls.io/github/simon-p-r/wadofgum-mongodb?branch=master)
+## wadofgum-mongodb [![Build Status](https://travis-ci.org/simon-p-r/wadofgum-mongodb.svg)](https://travis-ci.org/simon-p-r/wadofgum-mongodb) [![Coverage Status](https://coveralls.io/repos/github/simon-p-r/wadofgum-mongodb/badge.svg?branch=master)](https://coveralls.io/github/simon-p-r/wadofgum-mongodb?branch=master)
 
 A mongodb mixin for [wadofgum](https://github.com/nlf/wadofgum)
 
