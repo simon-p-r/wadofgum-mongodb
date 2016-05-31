@@ -2,7 +2,7 @@
 
 A mongodb mixin for [wadofgum](https://github.com/nlf/wadofgum)
 
-### Usage
+#### Usage
 
 After extending your model with this mixin, instances of your class will have various wrapped mongodb crud methods.
 
