@@ -1,5 +1,7 @@
 ## Changelog
 
++ 1.2.0 - reverted version of wadofgum due to regression, added tests and improve type checking on static functions
+
 + 1.1.1 - updated badge link for coveralls
 
 + 1.1.0 - bumped dependencies, added coveralls and updated travis file

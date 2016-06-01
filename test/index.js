@@ -351,6 +351,20 @@ describe('Validation', () => {
         });
     });
 
+    it('should return an error from deleteOne method due to missing db object', (done) => {
+
+        class User extends Wadofgum.mixin(Validation, Mongo) {};
+        User.schema = UserSchema;
+        const user = new User({
+            _id: '1'
+        });
+        user.deleteOne({}, (err, res) => {
+
+            expect(err).to.exist();
+            done();
+        });
+    });
+
     it('should expose a count method on the model object', (done) => {
 
         class User extends Wadofgum.mixin(Mongo, Validation) {};
@@ -360,6 +374,17 @@ describe('Validation', () => {
 
             expect(err).to.not.exist();
             expect(count).to.be.a.number().and.equal(2);
+            done();
+        });
+    });
+
+    it('should return an error from count static due to missing db object', (done) => {
+
+        class User extends Wadofgum.mixin(Validation, Mongo) {};
+        User.schema = UserSchema;
+        User.count({}, (err, res) => {
+
+            expect(err).to.exist();
             done();
         });
     });
@@ -378,6 +403,17 @@ describe('Validation', () => {
         });
     });
 
+    it('should return an error from distinct static due to missing db object', (done) => {
+
+        class User extends Wadofgum.mixin(Validation, Mongo) {};
+        User.schema = UserSchema;
+        User.distinct({}, (err, res) => {
+
+            expect(err).to.exist();
+            done();
+        });
+    });
+
     it('should expose a find method on the model class object', (done) => {
 
         class User extends Wadofgum.mixin(Mongo, Validation) {};
@@ -387,6 +423,17 @@ describe('Validation', () => {
 
             expect(err).to.not.exist();
             expect(docs).to.be.an.array().and.to.have.length(2);
+            done();
+        });
+    });
+
+    it('should return an error from find static due to missing db object', (done) => {
+
+        class User extends Wadofgum.mixin(Validation, Mongo) {};
+        User.schema = UserSchema;
+        User.find({}, (err, res) => {
+
+            expect(err).to.exist();
             done();
         });
     });
@@ -446,6 +493,17 @@ describe('Validation', () => {
         });
     });
 
+    it('should return an error from insertMany static due to missing db object', (done) => {
+
+        class User extends Wadofgum.mixin(Validation, Mongo) {};
+        User.schema = UserSchema;
+        User.insertMany(Recs, (err, res) => {
+
+            expect(err).to.exist();
+            done();
+        });
+    });
+
     it('should expose a deleteMany method on the model class object', (done) => {
 
         class User extends Wadofgum.mixin(Validation, Mongo) {};
@@ -455,6 +513,17 @@ describe('Validation', () => {
 
             expect(err).to.not.exist();
             expect(res.deletedCount).to.be.above(0);
+            done();
+        });
+    });
+
+    it('should return an error from deleteMany static due to missing db object', (done) => {
+
+        class User extends Wadofgum.mixin(Validation, Mongo) {};
+        User.schema = UserSchema;
+        User.deleteMany({}, (err, res) => {
+
+            expect(err).to.exist();
             done();
         });
     });
