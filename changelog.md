@@ -1,5 +1,7 @@
 ## Changelog
 
++ 1.1.1 - updated badge link for coveralls
+
 + 1.1.0 - bumped dependencies, added coveralls and updated travis file
 
 + 1.0.0 - changes due to wadofgum core changes, improved tests and removed pre-test mongodb script.  Bumped other deps
