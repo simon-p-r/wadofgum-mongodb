@@ -1,7 +1,9 @@
 ## wadofgum-mongodb
-[![Build Status](https://travis-ci.org/simon-p-r/wadofgum-mongodb.svg)](https://travis-ci.org/simon-p-r/wadofgum-mongodb)
-[![Coverage Status](https://coveralls.io/repos/github/simon-p-r/wadofgum-mongodb/badge.svg?branch=master)](https://coveralls.io/github/simon-p-r/wadofgum-mongodb?branch=master)
-
+[![build status](https://travis-ci.org/simon-p-r/wadofgum-mongodb.svg?branch=master)](https://travis-ci.org/simon-p-r/wadofgum-mongodb)
+[![Current Version](https://img.shields.io/npm/v/wadofgum-mongodb.svg?maxAge=1000)](https://www.npmjs.org/package/wadofgum-mongodb)
+[![dependency Status](https://img.shields.io/david/simon-p-r/wadofgum-mongodb.svg?maxAge=1000)](https://david-dm.org/simon-p-r/wadofgum-mongodb)
+[![devDependency Status](https://img.shields.io/david/dev/simon-p-r/wadofgum-mongodb.svg?maxAge=1000)](https://david-dm.org/simon-p-r/wadofgum-mongodb)
+[![Coveralls](https://img.shields.io/coveralls/simon-p-r/wadofgum-mongodb.svg?maxAge=1000)](https://coveralls.io/github/simon-p-r/wadofgum-mongodb)
 A mongodb mixin for [wadofgum](https://github.com/nlf/wadofgum)
 
 #### Usage
