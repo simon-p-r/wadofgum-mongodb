@@ -25,7 +25,7 @@ const beforeEach = lab.beforeEach;
 const after = lab.after;
 const afterEach = lab.afterEach;
 
-describe('Validation', () => {
+describe('Wadofgum-mongodb', () => {
 
     let testDb;
     before((done) => {

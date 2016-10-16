@@ -1,6 +1,6 @@
 {
   "name": "wadofgum-mongodb",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "wadofgum models for mongo",
   "main": "lib/index.js",
   "scripts": {
@@ -32,8 +32,9 @@
     "z-schema": "^3.18.0"
   },
   "dependencies": {
-    "basic-utils": "^1.6.1",
+    "basic-utils": "^1.7.0",
     "hoek": "^4.1.0",
-    "neo-async": "^2.0.1"
+    "neo-async": "^2.0.1",
+    "wadofgum-json-schema": "^1.2.2"
   }
 }
