@@ -1,4 +1,6 @@
 ## wadofgum-mongodb
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/simon-p-r/wadofgum-mongodb.svg)](https://greenkeeper.io/)
 [![build status](https://travis-ci.org/simon-p-r/wadofgum-mongodb.svg?branch=master)](https://travis-ci.org/simon-p-r/wadofgum-mongodb)
 [![Current Version](https://img.shields.io/npm/v/wadofgum-mongodb.svg?maxAge=1000)](https://www.npmjs.org/package/wadofgum-mongodb)
 [![dependency Status](https://img.shields.io/david/simon-p-r/wadofgum-mongodb.svg?maxAge=1000)](https://david-dm.org/simon-p-r/wadofgum-mongodb)
